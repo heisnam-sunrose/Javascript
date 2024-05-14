@@ -20,7 +20,7 @@
       1.Head
       2.Last
       3.Position
-      4.Before a givenValue
+      4.Before a given Value
 
 */
 console.clear();
@@ -65,7 +65,7 @@ class LinkedList {
   }
 
   /*
-     2. Search an element in a Linked List
+     2. Traverse the Linked List
      O(N) time Complexity 
   */
 
@@ -96,7 +96,7 @@ class LinkedList {
   }
 
   /* 
-    4. Length of the Linked List
+    4. Search an element in a Linked List
     O(N) time Complexity 
   */
 
@@ -154,6 +154,8 @@ class LinkedList {
     }
     // delete tail node
     secondLastNode.next.next = null;
+
+   // Do we need this????
     secondLastNode.next = null;
 
     return this.head;
