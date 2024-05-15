@@ -155,7 +155,7 @@ class LinkedList {
     // delete tail node
     secondLastNode.next.next = null;
 
-   // Do we need this????
+    // Do we need this????
     secondLastNode.next = null;
 
     return this.head;
@@ -228,8 +228,7 @@ class LinkedList {
   */
 
   insertAtHead(value) {
-    let newNode = new Node(value);
-    newNode.next = this.head;
+    let newNode = new Node(value, this.head);
     this.head = newNode;
 
     return this.head;
