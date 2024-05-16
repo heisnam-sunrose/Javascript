@@ -3,6 +3,8 @@
   next => reference to next node
   prev => reference to previous node
 
+  Doubly linked list is used in browsers
+
   Operations
 
   ==================================================
@@ -15,11 +17,11 @@
       1.Head
       2.Last
       3.Position
-      4.Value
+      4.Node (Not Value)
       
   6. Insertion of a node in a Linked List
       1.Head
-      2.Last
+      2.Before Last
       3.Position
       4.Before a given Value
 
@@ -27,6 +29,7 @@
 */
 
 console.clear();
+
 class Node {
   constructor(data, next = null, prev = null) {
     this.data = data;
@@ -43,6 +46,7 @@ class DoublyLinkedList {
   //1. Convert an array to Linked List
 
   arrayToDoublyLinkedList(arr) {
+    // create head
     this.head = new Node(arr[0]);
     let previousNode = this.head;
 
@@ -56,6 +60,56 @@ class DoublyLinkedList {
   }
 
   /*
+     2. Traverse the Linked List
+     O(N) time Complexity 
+  */
+
+  traverse() {
+    let currentNode = this.head;
+
+    while (currentNode) {
+      console.log(currentNode.data);
+      currentNode = currentNode.next;
+    }
+  }
+
+  /* 
+    3. Length of the Linked List
+    O(N) time Complexity 
+  */
+
+  length() {
+    let currentNode = this.head;
+    let count = 0;
+
+    while (currentNode) {
+      currentNode = currentNode.next;
+      count++;
+    }
+    console.log(count);
+    return count;
+  }
+
+  /* 
+    4. Search an element in a Linked List
+    O(N) time Complexity 
+  */
+
+  checkIfPresent(number) {
+    let currentNode = this.head;
+
+    while (currentNode) {
+      if (currentNode.data == number) return true;
+      currentNode = currentNode.next;
+    }
+
+    return false;
+  }
+
+  /*
+    The idea for deletion is remove the prev and next
+    (OR) assign next and prev to null
+      
     5.1 Deletion of head of a Linked List 
      O(1) time Complexity 
   */
@@ -64,10 +118,19 @@ class DoublyLinkedList {
     // return head for empty Linked List
     if (this.head === null) return this.head;
 
+    // only head exists
+    if (this.head.next === null) {
+      this.head = null;
+      return this.head;
+    }
+
     let temp = this.head;
     this.head = this.head.next;
-    // Linked List contains head only
-    if (this.head) this.head.prev = null;
+
+    // detached the previous head form the Linked List
+    this.head.prev = null;
+    temp.next = null;
+    // delete previous head
     temp = null;
 
     return this.head;
@@ -84,28 +147,32 @@ class DoublyLinkedList {
 
     // only Head Present
     if (this.head.next === null) {
-      let temp = this.head;
       this.head = null;
-      temp = null;
       return this.head;
     }
 
-    // Find the second Last
+    // Find tail
 
-    let secondLastNode = this.head;
+    let tailNode = this.head;
 
-    while (secondLastNode.next.next !== null) {
-      secondLastNode = secondLastNode.next;
+    while (tailNode.next !== null) {
+      tailNode = tailNode.next;
     }
 
-    secondLastNode.next.prev = null;
-    secondLastNode.next = null;
+    // detached the tail node from the Linked List
+    tailNode.prev.next = null;
+    tailNode.prev = null;
+
+    // delete tail
+    tailNode = null;
+
     return this.head;
   }
 
   /*
     5.3 Deletion of Kth Position Node of a Linked List 
      O(N) time Complexity 
+     cases
   */
 
   deleteByPosition(position) {
@@ -117,100 +184,171 @@ class DoublyLinkedList {
       let temp = this.head;
       if (this.head.next) {
         this.head = this.head.next;
-        this.prev = null;
+
+        // detached the node from the Linked List
+        this.head.prev = null;
+        temp.next = null;
       }
       temp = null;
 
       return this.head;
     }
 
-    // Any Kth position
+    /* 
+       Any arbitrary position
+       Position == LinkedList last node, delete tail
+       Position > LinkedList size no deletion
+       
+    */
     let count = 1;
     let prevNode = this.head;
     let nodeToDelete;
+    let nextNode;
     while (prevNode) {
       count++;
       if (count === position) {
-        // Detached the node from The Linked List
         nodeToDelete = prevNode.next;
+        nextNode = prevNode.next.next;
+
+        // Connect the previous and next nodes
+        prevNode.next = nodeToDelete.next;
+
+        // nextNode == = null means nodeToDelete is last Node
+        if (nextNode) nodeToDelete.next.prev = prevNode;
+
+        // Detached the node from The Linked List
         nodeToDelete.next = null;
         nodeToDelete.prev = null;
-        prevNode = nodeToDelete.next;
-        nodeToDelete.next.prev = prevNode;
+
+        // Delete the node
+        nodeToDelete = null;
+
         break;
       }
       prevNode = prevNode.next;
     }
-    // Delete the node
-    nodeToDelete = null;
+
+    return this.head;
+  }
+
+  // preferred
+  deleteByPositionV2(position) {
+    // empty Linked List
+    if (this.head === null) return this.head;
+
+    let count = 0;
+    let KNode = this.head;
+    while (KNode) {
+      count++;
+      if (count === position) break;
+      KNode = KNode.next;
+    }
+
+    let prev = KNode.prev;
+    let next = KNode.next;
+
+    if (prev === null && front === null) {
+      // only head present
+    } else if (prev == null) {
+      // delete head
+      this.head = next;
+    } else if (next === null) {
+      // delete tail
+      prev.next = null;
+    } else {
+      // delete intermediate node
+
+      // Connect the previous and next nodes
+      prev.next = next;
+      next.prev = prev;
+
+      // Detached the node from The Linked List
+      KNode.next = null;
+      KNode.prev = null;
+    }
+    // Delete node
+    KNode = null;
+
     return this.head;
   }
 
   /*
     5.4 Deletion q node by value Linked List 
+    The node to delete must never be the head of Linked List
      O(N) time Complexity
   */
 
-  deleteByValue(value) {
+  deleteNode(node) {
     // empty Linked List
     if (this.head === null) return this.head;
 
-    let prevNode = this.head;
-    let nodeToDelete;
-    while (prevNode) {
-      if (prevNode.next.data === value) {
-        // Detached the node from The Linked List
-        nodeToDelete = prevNode.next;
-        nodeToDelete.next = null;
-        nodeToDelete.prev = null;
-        prevNode = nodeToDelete.next;
-        nodeToDelete.next.prev = prevNode;
-        break;
-      }
-      prevNode = prevNode.next;
+    let prevNode = node.prev;
+    let nextNode = node.next;
+
+    // tail of the Linked List
+    if (nextNode === null) {
+      prevNode.next = null;
+    } else {
+      // delete intermediate node
+
+      // Connect the previous and next nodes
+      prevNode.next = next;
+      nextNode.prev = prev;
     }
+
+    // Detached the node from The Linked List
+    node.next = null;
+    node.prev = null;
+
+    // Delete node
+    node = null;
+
+    return this.node;
+  }
+
+  //6.1 Insertion of a node at head of the Linked List
+  insertBeforeHead(value) {
+    let newHead = new Node(value, this.head);
+
+    // Non Empty Linked List
+    if (this.head) this.head.prev = newHead;
+
+    this.head = newHead;
 
     return this.head;
   }
 
-  //6.1 Insertion of a node at head of the Linked List
-  insertAtHead(value) {
-    let newNode = new Node(value, null, this.head);
-
-    // Non Empty Linked List
-    if (this.head) this.head.prev = newNode;
-
-    this.head = newNode;
-
-    return newNode;
-  }
-
   //6.2 Insertion of a node at tail of the Linked List
-  insertAtTail(value) {
+  insertBeforeTail(value) {
     // Empty Linked List
     if (this.head === null) {
       this.head = new Node(value);
       return this.head;
     }
 
+    // Non Empty Linked List
     let tailNode = this.head;
 
-    // Non Empty Linked List
-    while (tailNode.next != null) {
+    while (tailNode) {
       tailNode = tailNode.next;
     }
+    let prevNode = tailNode.prev;
+    let newNode = new Node(value, tailNode, tailNode.prev);
 
-    let newNode = new Node(value, tailNode);
-    tailNode.next = newNode;
+    // Connect the previous and next nodes
+    tailNode.prev = newNode;
+    // no prevNode means only head is present
+    if (prevNode) prevNode.next = newNode;
 
-    return newNode;
+    return this.head;
   }
 
   /*
-      6.3 Insertion of a node in a Linked List at Kth position
-      K = 1 to n+1
+      6.3 Insertion of a node in a Linked List before Kth position
+      K = 1 to n
   */
-  insertAtPosition(position, value) {
+
+  insertBeforeKthElement(position, value) {
     // LinkedList is empty
     if (this.head === null) {
       if (k === 1) {
@@ -220,34 +358,43 @@ class DoublyLinkedList {
       return this.head;
     }
 
-    // if position == 1, insert at head
-    if (position === 1) {
-      let newNode = new Node(value, this.head);
-      this.head.prev = newNode;
-      this.head = newNode;
-      return this.head;
-    }
-
-    /* 
-       K(position) > 2
-       Insert at tail 
-       Insert at Kth 
-    */
-    let count = 1;
     let currentNode = this.head;
+    let count = 0;
     while (currentNode) {
       count++;
-      if (count === position) {
-        new Node(value, currentNode.next, currentNode);
-        break;
-      }
-
+      if (count === position) break;
       currentNode = currentNode.next;
     }
+    let prevNode = currentNode.prev;
+
+    let newNode = new Node(value, currentNode, prevNode);
+
+    // Connect the previous and next nodes
+    currentNode.prev = newNode;
+    // prevNode is empty means currentNode is head
+    if (prevNode) prevNode.next = newNode;
+
+    return this.head;
+  }
+
+  /*
+  6.4 Insert before given node in a Linked List
+      node can never be head, as we don't want to alter the head of the Linked List
+  */
+  insertBeforeNode(node, value) {
+    let prevNode = node.prev;
+
+    let newNode = new Node(value, node, prevNode);
+
+    // Connect the previous and next nodes
+    node.prev = newNode;
+    prevNode.next = newNode;
+
     return this.head;
   }
 }
 
+// Execution
 dll = new DoublyLinkedList();
 
 // console.log(dll.arrayToDoublyLinkedList([1, 2, 3]));

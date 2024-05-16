@@ -122,6 +122,9 @@ class LinkedList {
 
     let temp = this.head;
     this.head = this.head.next;
+
+    // detached previous head form the Linked List
+    temp.next = null;
     // free head memory / delete head
     temp = null;
 
