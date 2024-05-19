@@ -1,4 +1,4 @@
-what is Linked List?
+# what is Linked List?
 ================================================================
 
 Array is of fixed length.
@@ -6,7 +6,7 @@ Array is stored in the heap memory in contiguous location.
 Array is easy to traverse with index.
 We cannot increase or decrease the size of the array.
 
-Linked List
+## Linked List
 -------------------------------------------------------------
 
 This where LinkedList comes.
@@ -24,7 +24,7 @@ In Linked List for any method we always return the head
 
 
 
-Use case 
+## Use case 
 ================================================================
 
 1.Stack 
@@ -33,9 +33,9 @@ Use case
 
 
 
-Data Type for Implementing Linked List
+## Data Type for Implementing Linked List
 ================================================================
 Custom / Self defined data type 
 
 Class ----> JavaScript, Java 
-Struct ----> C
+Struct----> C
