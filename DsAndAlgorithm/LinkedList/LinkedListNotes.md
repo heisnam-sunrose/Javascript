@@ -1,5 +1,4 @@
 # what is Linked List?
-================================================================
 
 Array is of fixed length.
 Array is stored in the heap memory in contiguous location.
@@ -7,7 +6,7 @@ Array is easy to traverse with index.
 We cannot increase or decrease the size of the array.
 
 ## Linked List
--------------------------------------------------------------
+
 
 This where LinkedList comes.
 Linked List can increase or decrease its length.
@@ -25,7 +24,7 @@ In Linked List for any method we always return the head
 
 
 ## Use case 
-================================================================
+
 
 1.Stack 
 2.Queue
@@ -34,7 +33,7 @@ In Linked List for any method we always return the head
 
 
 ## Data Type for Implementing Linked List
-================================================================
+
 Custom / Self defined data type 
 
 Class ----> JavaScript, Java 
