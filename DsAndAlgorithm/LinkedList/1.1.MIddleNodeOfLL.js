@@ -1,3 +1,4 @@
+// Find the middle node of the LL
 console.clear();
 class Node {
   constructor(data, next = null) {
@@ -70,40 +71,42 @@ const findMiddleNode = (head) => {
 };
 
 /*
- Optimized Solution
+ Optimized Solution 
+ Tortoise & Hare Algorithm
+
  Find the middle node
   O(N/2) time complexity
   O(1) space complexity
  ---------------------------------------
 
- slow pointer  => moves by 1 step
- fast pointer  => moves by 2 step 
- In even LL, fast pointer reaches last 
- In odd LL, fast pointer never reaches last
+ tortoise pointer  => moves by 1 step
+ hare pointer  => moves by 2 step 
+
+ hare travels -> x distance
+ tortoise travels => x/2 distance
+
+ In even LL, hare crosses tail and reaches tail.next( null )
+ In odd LL, hare reaches tail
 */
 
 const findMiddleNodeOp = (head) => {
-  let slowPointer = head;
-  let fastPointer = head;
+  let tortoise = head;
+  let hare = head;
 
   /*
-  fastPointer.next === null, 
-  fastPointer is the tail.
-  The LL has even nodes
+  LL has odd nodes
+  if hare.next === null, hare is the tail.
 
-  ============================
-
-  fastPointer === null, 
-  fastPointer is the tail.next
-  The LL has odd nodes
+  LL has even nodes
+  if hare === null, hare is the tail
   */
 
-  while (fastPointer.next !== null && fastPointer !== null) {
-    slowPointer = slowPointer.next;
-    fastPointer = fastPointer.next.next;
+  while (hare.next !== null && hare !== null) {
+    tortoise = tortoise.next;
+    hare = hare.next.next;
   }
 
-  return slowPointer;
+  return tortoise;
 };
 
 head = convertArrayToLL([1, 2, 3, 4, 5]);
