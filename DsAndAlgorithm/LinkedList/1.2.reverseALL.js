@@ -28,16 +28,19 @@ const printLL = (head) => {
   }
 };
 
-/* Reverse a DDL by reversing the data using stack 
+/* 1. Reverse a DDL by reversing the data using stack 
   ------------------------------------------------
   TC -> O(2N)
   SC -> O(N)
-
 */
-const reverseLLStack = () => {};
 
-/* Reverse a DDL by reversing Link
-  ------------------------------------------------
+const reverseLLStack = () => {
+  // move the LLnodes data to stack
+  // pop stacks data out and store them to the same LL
+};
+
+/* 2. Reverse a DDL by reversing Link
+  --------------------------------
   TC -> O(N)
   SC -> O(1)
 */
@@ -56,17 +59,22 @@ const reverseLLLinkReversal = (head) => {
   return prev;
 };
 
-/* Reverse a DDL by recursion
+/* 3. Reverse a DDL by recursion
   ------------------------------------------------
   TC -> O(N)
   SC -> O(N)
 */
 
 const reverseLLRecursion = (head) => {
+  // base condition
   if (head === null || head.next === null) {
     return head;
   }
+
+  let newHead = reverseLLRecursion(head.next);
+  let front = head.next;
   front.next = head;
   head.next = null;
-  return front;
+
+  return newHead;
 };

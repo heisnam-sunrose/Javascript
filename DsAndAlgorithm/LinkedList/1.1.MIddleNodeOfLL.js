@@ -101,7 +101,7 @@ const findMiddleNodeOp = (head) => {
   if hare === null, hare is the tail
   */
 
-  while (hare.next !== null && hare !== null) {
+  while (hare.next && hare) {
     tortoise = tortoise.next;
     hare = hare.next.next;
   }
