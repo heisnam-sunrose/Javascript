@@ -51,7 +51,9 @@ const deleteKey = (head, key) => {
       // detached the currentNode from DLL
       currentNode.prev = null;
       currentNode.next = null;
+      // delete the node
       currentNode = null;
+
       currentNode = nextNode;
     } else {
       currentNode = currentNode.next;
