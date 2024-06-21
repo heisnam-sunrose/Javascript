@@ -69,6 +69,9 @@ classDiagram
     createProductA()
     createProductB()
   }  
+
+  class ProductA
+    <<Abstract>> ProductA
   
   class ConcreteProductA1 {   
   }
