@@ -5,6 +5,27 @@
 2. Factory Method
 3. Abstract Factory Pattern
 
+# 1. Simple factory pattern (It is not Pattern) 
+
+#### The Simple Factory isn’t actually a Design Pattern. It’s more of a programming idiom. Identify the aspects that vary and separate them from what stays the same.
+
+```mermaid 
+classDiagram
+    Product <|-- ConcreteProduct1 : ConcreteProduct1 implements Product
+    Product <|-- ConcreteProduct2 : ConcreteProduct2 implements Product
+    Product <|-- ConcreteProduct3 : ConcreteProduct3 implements Product
+    SimpleFactory --> Product : SimpleFactory creates a Product
+  
+     
+   class SimpleFactory  {
+      createProduct()
+   } 
+
+   class Product
+      <<Abstract>> Product
+  
+  ```
+
 
 
 # 2. Factory Method Pattern
@@ -14,27 +35,24 @@
 
 ```mermaid 
 classDiagram
-    Product <|-- ConcreteProduct : ConcreteProduct implements Product
-    Creator <|-- ConcreteCreator : ConcreteCreator implements Creator
-    ConcreteCreator --> ConcreteProduct
-    
-    class Creator
-     <<Abstract>> Creator
-     Creator : factoryMethod()*
-     Creator : Operation()
-     
-   class ConcreteCreator {
-      PizzaFactory factory
-    + Pizza : orderPizza( type )
-   } 
-
-   class Product
-      <<Abstract>> Product
+  Product <|-- ConcreteProduct1 : ConcreteProduct1 implements Product
+  Product <|-- ConcreteProduct2 : ConcreteProduct2 implements Product
+  Product <|-- ConcreteProduct3 : ConcreteProduct3 implements Product
+  Creator <|-- ConcreteCreator : ConcreteCreator implements Creator
+  ConcreteCreator --> Product : ConcreteCreator creates a Product
   
+  class Creator
+    <<Abstract>> Creator
+    Creator : factoryMethod()*
+    Creator : Operation()
+    
+  class ConcreteCreator {
+    factoryMethod()
+  } 
 
-   class ConcreteProduct {   
-   } 
-
+  class Product
+    <<Abstract>> Product
+  
   ```
 
 
@@ -73,20 +91,6 @@ classDiagram
   class ProductA
     <<Abstract>> ProductA
   
-  class ConcreteProductA1 {   
-  }
-    
-  class ConcreteProductA2 {   
-  }
-
   class ProductB
     <<Abstract>> ProductB
-
-
-  class ConcreteProductB1 {   
-  } 
-
-  class ConcreteProductB2 {   
-  } 
-
   ```
