@@ -32,8 +32,8 @@ const removeDuplicatesOp = (arr) => {
   let firstPointer = 0;
   for (let secondPointer = 1; secondPointer < arr.length; secondPointer++) {
     if (arr[firstPointer] != arr[secondPointer]) {
-      arr[firstPointer + 1] = arr[secondPointer];
       firstPointer++;
+      arr[firstPointer] = arr[secondPointer];
     }
   }
 
