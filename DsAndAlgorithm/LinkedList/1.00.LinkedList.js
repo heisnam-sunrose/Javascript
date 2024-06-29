@@ -21,6 +21,7 @@
       2.Last
       3.Position
       4.Before a given Value
+  7. Delete a node from a Linked List
 
 */
 console.clear();
@@ -296,4 +297,15 @@ const insertBeforeValue = (head, element, value) => {
     currentNode = currentNode.next;
   }
   return head;
+};
+
+/*
+  Delete a node from LL  
+  There is a singly-linked list head and we want to delete a node node in it.
+  You are given the node to be deleted node. You will not be given access to the first node of head.
+*/
+
+const deleteNode = (node) => {
+  node.data = node.next.data;
+  node.next = node.next.next;
 };
