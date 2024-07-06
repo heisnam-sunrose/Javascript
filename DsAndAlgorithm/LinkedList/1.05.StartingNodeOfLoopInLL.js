@@ -1,35 +1,4 @@
-console.clear();
-
-class Node {
-  constructor(data, next) {
-    this.data = data;
-    this.next = next;
-  }
-}
-
-const arrayToLL = (array) => {
-  // create head
-  let head = new Node(array[0]);
-  let currentNode = head;
-  let newHead;
-
-  for (let i = 1; i < array.length; i++) {
-    newNode = new Node(array[i]);
-    currentNode.next = newNode;
-    currentNode = newNode;
-  }
-
-  return head;
-};
-
-let printLL = (head) => {
-  let currentNode = head;
-
-  while (currentNode) {
-    console.log(currentNode.data);
-    currentNode = currentNode.next;
-  }
-};
+// Find the starting point of the Loop/Cycle in LinkedList
 
 /*
   Hashing Technique
@@ -53,7 +22,7 @@ const startNode = (head) => {
 };
 
 /*
-  Tortoise and Hare algorithm
+  Floyd's Tortoise & Hare Algorithm
 
   Steps 
   -----------------------------------

@@ -13,11 +13,16 @@
     2. Last
     3. Position
     4. Before a given Value
-7. Delete a node from LL  
-8. Reverse Nodes in K Group Size of LinkedList
-9. Rotate a LinkedList
-10. Flattening a LinkedList
-11. Clone a LinkedList with Next and Random Pointers
+7. Delete a node from LL 
+8. Find the middle node of the LL(Floyd's Tortoise & Hare Algorithm)
+9. Detect a loop in a Linked List(Floyd's Tortoise & Hare Algorithm) 
+10. Get the length of the Loop(Floyd's Tortoise & Hare Algorithm)
+11. Check if a LinkedList is Palindrome or Not (Floyd's Tortoise & Hare Algorithm)
+12. 
+13. Reverse Nodes in K Group Size of LinkedList
+14. Rotate a LinkedList
+15. Flattening a LinkedList
+16. Clone a LinkedList with Next and Random Pointers
    
    
 

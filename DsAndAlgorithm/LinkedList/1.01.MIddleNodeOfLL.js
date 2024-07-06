@@ -1,42 +1,9 @@
 // Find the middle node of the LL
-console.clear();
-class Node {
-  constructor(data, next = null) {
-    this.data = data;
-    this.next = next;
-  }
-}
-
-const convertArrayToLL = (array) => {
-  // create head node
-  let head = new Node(array[0]);
-  let currentNode = head;
-
-  let newNode;
-
-  for (let i = 1; i < array.length; i++) {
-    newNode = new Node(array[i]);
-    currentNode.next = newNode;
-    currentNode = currentNode.next;
-  }
-
-  return head;
-};
-
-const printLL = (head) => {
-  let currentNode = head;
-
-  while (currentNode) {
-    console.log(currentNode.data);
-    currentNode = currentNode.next;
-  }
-};
-
 /*
    Find the middle node
    Naive Solution
    O(2N) time complexity
-   O(N) space complexity
+   O(1) space complexity
    -------------------------------------------- 
    Naive Implementation
    Middle Node = (Length/ 2) + 1
@@ -72,7 +39,7 @@ const findMiddleNode = (head) => {
 
 /*
  Optimized Solution 
- Tortoise & Hare Algorithm
+ Floyd's Tortoise & Hare Algorithm
 
  Find the middle node
   O(N/2) time complexity
@@ -108,12 +75,3 @@ const findMiddleNodeOp = (head) => {
 
   return tortoise;
 };
-
-head = convertArrayToLL([1, 2, 3, 4, 5]);
-console.log(head);
-
-printLL(head);
-
-console.log("Naive SOlution =>", findMiddleNode(head));
-
-console.log("Optimized => ", findMiddleNodeOp(head));

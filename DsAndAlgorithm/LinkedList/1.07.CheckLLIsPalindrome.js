@@ -1,29 +1,5 @@
 // Check if LL is palindrome
 
-console.clear();
-class Node {
-  constructor(data, next = null) {
-    this.data = data;
-    this.next = next;
-  }
-}
-
-const convertArrayToLL = (array) => {
-  // create head node
-  let head = new Node(array[0]);
-  let currentNode = head;
-
-  let newNode;
-
-  for (let i = 1; i < array.length; i++) {
-    newNode = new Node(array[i]);
-    currentNode.next = newNode;
-    currentNode = currentNode.next;
-  }
-
-  return head;
-};
-
 /*                           
    1. Using Stack 
    =================================
@@ -69,8 +45,7 @@ const reverseLL = (head) => {
 };
 
 const isPalindrome = (head) => {
-  if (head === null || head.next === null) return true;
-
+  // 1. Split the LL at middle into left & right sub arrays
   let hare = head;
   let tortoise = head;
 
@@ -79,55 +54,21 @@ const isPalindrome = (head) => {
     hare = hare.next.next;
   }
 
+  let left = head;
+  // Reverse the right sub array
   let newHead = reverseLL(tortoise.next);
-  let first = head;
-  let second = newHead;
+  let right = newHead;
 
-  while (second) {
-    if (first.data != second.data) {
-      reverseLL(newHead);
+  // 3. Palindrome check
+  while (right) {
+    if (left.val !== right.val) {
+      reverseLL(right);
       return false;
     }
-    first = first.next;
-    second = second.next;
+    right = right.next;
+    left = left.next;
   }
 
-  reverseLL(newHead);
+  reverseLL(right);
   return true;
-
-  /*
-
-  This one works in leet code
-  
-  if (head === null || head.next === null) return true;
-
-  let hare = head;
-  let tortoise = head;
-
-  while (hare && hare.next) {
-    tortoise = tortoise.next;
-    hare = hare.next.next;
-  }
-
-  let newHead = reverseLL(tortoise);
-  let first = head;
-  let second = newHead;
-
-  while (second) {
-    if (first.val !== second.val) {
-      reverseLL(newHead);
-      return false;
-    }
-    first = first.next;
-    second = second.next;
-  }
-
-  reverseLL(newHead);
-return true; 
-
-*/
 };
-
-let head = convertArrayToLL([1, 2, 4]);
-
-console.log(isPalindrome(head));

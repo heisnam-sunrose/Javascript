@@ -5,34 +5,6 @@
   2. Tortoise & Hare Algorithm 
 */
 
-class Node {
-  constructor(data, next) {
-    this.data = data;
-    this.next = next;
-  }
-}
-
-const convertArrayToLL = (arr) => {
-  // create head
-  let head = new Node(arr[0]);
-
-  let newNode;
-  let currentNode = head;
-  for (let i = 1; i < arr.length; i++) {
-    newNode = new Node(arr[i]);
-    currentNode.next = newNode;
-    currentNode = newNode;
-  }
-};
-
-const printLL = (head) => {
-  let currentNode = head;
-  while (currentNode) {
-    console.log(currentNode);
-    currentNode = currentNode.next;
-  }
-};
-
 const makeLoop = (head, k) => {
   // traverse the linked list until loop
   // point not found
@@ -75,7 +47,7 @@ const containsLoop = (head) => {
 };
 
 /* 
-  Tortoise & Hare Algorithm
+  Floyd's Tortoise & Hare Algorithm
 
   If the tortoise and hare collides, the LL has a loop 
   ===========================
@@ -95,7 +67,10 @@ const containsLoop = (head) => {
 const containsLoopTH = (head) => {
   let tortoise = head;
   let hare = head;
-
+  /*
+     hare => hare is at last node.next (even Linear LL)
+     hare.next => hare is at the last( odd Linear LL)  
+   */
   while (hare && hare.next) {
     // If tortoise and hare collides, loop is present
     if (hare === tortoise) {

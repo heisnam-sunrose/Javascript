@@ -2,7 +2,7 @@
 
 /* Hashing Technique
 
-  TC ->  O(N * hashing set and get) 
+  TC -> O(N * hashing set and get) 
   SC -> O(N) (size of node map)
 */
 
@@ -24,7 +24,7 @@ const lengthH = (head) => {
 };
 
 /*
-  Tortoise & Hare Algorithms  
+  Floyd's Tortoise & Hare Algorithm  
 */
 
 const lengthTH = (head) => {
