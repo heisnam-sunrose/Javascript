@@ -1,4 +1,4 @@
-// group the given LL into odd and even nodes
+// Group the given LL into odd and even nodes
 /*
   1. Using another DS list with data replacement
    TC => O(N) 
@@ -56,7 +56,7 @@ const segregateOddEven = (head) => {
 /*
    Using link changes
    TC => O(N)
-   SC => O(1)SS
+   SC => O(1)
 */
 
 const segregateOddEvenLC = (head) => {
@@ -67,13 +67,15 @@ const segregateOddEvenLC = (head) => {
   let even = head.next;
   let evenHead = head.next;
   /*
-    Even is before Odd, so even should reach tail first
+    Even is after Odd : 
+    1.Even should reach tail first
+    2.Update link fort odd first***
   */
   while (even && even.next) {
     odd.next = odd.next.next;
     even.next = even.next.next;
     odd = odd.next;
-    even = even.next.next;
+    even = even.next;
   }
 
   // connect odd and even nodes

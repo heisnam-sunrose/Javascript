@@ -18,11 +18,17 @@
 9. Detect a loop in a Linked List(Floyd's Tortoise & Hare Algorithm) 
 10. Get the length of the Loop(Floyd's Tortoise & Hare Algorithm)
 11. Check if a LinkedList is Palindrome or Not (Floyd's Tortoise & Hare Algorithm)
-12. 
-13. Reverse Nodes in K Group Size of LinkedList
-14. Rotate a LinkedList
-15. Flattening a LinkedList
-16. Clone a LinkedList with Next and Random Pointers
+12. Group the given LL into odd and even nodes
+13. Remove Nth Node from the end of the LinkedList (Forward and slow pointer)
+14. Delete the Middle Node of a Linked List (Floyd's Tortoise & Hare Algorithm)
+15. Sort a LinkedList of 0's, 1's and 2's (Dummy Pointers)
+16. Find the intersection point of Y LinkedList
+17. Add 1 to a number represented by LinkedList
+18. Add 2 numbers in LinkedList 
+19. Reverse Nodes in K Group Size of LinkedList
+20. Rotate a LinkedList
+21. Flattening a LinkedList
+22. Clone a LinkedList with Next and Random Pointers
    
    
 

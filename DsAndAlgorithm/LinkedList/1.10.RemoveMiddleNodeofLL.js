@@ -7,7 +7,6 @@
 */
 
 const deleteMiddleNode = (head) => {
-  if (head == null || head.next === null) return null;
   let currentNode = head;
   let count = 0;
 
@@ -33,24 +32,18 @@ const deleteMiddleNode = (head) => {
 
     currentNode = currentNode.next;
   }
-  // for (let i = 0; i < parseInt(count / 2); i++) {
-  //   currentNode = currentNode.next;
-  // }
-
-  // let middle = currentNode.next;
-  // currentNode.next = middle.next;
-  // middle = null;
 
   return head;
 };
 
 /*
- Tortoise and Hare algorithm
+ Floyd's Tortoise & Hare Algorithm  
  Ensure tortoise skips one step 
 */
 const deleteMiddleNodeTH = (head) => {
   if (head == null || head.next === null) return null;
   let tortoise = head;
+  // Ensure tortoise skips one step
   let hare = head.next.next;
 
   //  tortoise much reach the node before the middle node

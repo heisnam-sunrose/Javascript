@@ -1,7 +1,7 @@
 // Remove Nth Node from the end of the LinkedList
 
 /* Naive solution
-TC => O(Len) + On(Len - N)
+TC => O(N) + On(N - nth position)
 Sc => O(1)
 */
 
@@ -53,21 +53,15 @@ const deleteNode = (head, N) => {
 
 const removeNode = (head, N) => {
   let fast = head;
+  let slow = head;
   /* 
-   Move fast by N steps 
+   1. Move fast by N steps 
    This will ensure when fast reaches the tail node,
-   Slow will be stopped at previous node. 
+   Slow will be stopped at previous node to delete. 
  */
   for (let i = 0; i < N; i++) fast = fast.next;
 
-  let slow = head;
-  let temp;
-
-  while (fast.next) {
-    fast = fast.next;
-    slow = slow.next;
-  }
-
+  // 2. N === length of the node
   if (fast === null) {
     temp = head;
     head = head.next;
@@ -78,12 +72,21 @@ const removeNode = (head, N) => {
     return head;
   }
 
-  temp = slow.Next;
-  slow.next = temp.next;
+  /*
+    3. Move fast to the tail
+    Now slow is pointing to the previous node to be deleted 
+  */
+  while (fast.next) {
+    fast = fast.next;
+    slow = slow.next;
+  }
 
-  // delete the node
-  temp.next = null;
-  temp = null;
+  let nodeToDelete = slow.Next;
+  slow.next = nodeToDelete.next;
+
+  // delete the Nth node
+  nodeToDelete.next = null;
+  nodeToDelete = null;
 
   return head;
 };
