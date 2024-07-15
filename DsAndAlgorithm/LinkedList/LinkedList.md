@@ -14,21 +14,23 @@
     3. Position
     4. Before a given Value
 7. Delete a node from LL 
-8. Find the middle node of the LL(Floyd's Tortoise & Hare Algorithm)
-9. Detect a loop in a Linked List(Floyd's Tortoise & Hare Algorithm) 
-10. Get the length of the Loop(Floyd's Tortoise & Hare Algorithm)
-11. Check if a LinkedList is Palindrome or Not (Floyd's Tortoise & Hare Algorithm)
-12. Group the given LL into odd and even nodes
-13. Remove Nth Node from the end of the LinkedList (Forward and slow pointer)
-14. Delete the Middle Node of a Linked List (Floyd's Tortoise & Hare Algorithm)
-15. Sort a LinkedList of 0's, 1's and 2's (Dummy Pointers)
-16. Find the intersection point of Y LinkedList
-17. Add 1 to a number represented by LinkedList
-18. Add 2 numbers in LinkedList 
-19. Reverse Nodes in K Group Size of LinkedList
-20. Rotate a LinkedList
-21. Flattening a LinkedList
-22. Clone a LinkedList with Next and Random Pointers
+8. Find the middle node of the LL(Floyd's Tortoise & Hare Algorithm/876)
+9. Reverse a LL (206)
+10. Detect a loop in a Linked List(Floyd's Tortoise & Hare Algorithm/141) 
+11. Find the starting point of the Loop/Cycle in LinkedList (Floyd's Tortoise & Hare Algorithm/142)
+12. Get the length of the Loop(Floyd's Tortoise & Hare Algorithm)
+13. Check if a LinkedList is Palindrome or Not (Floyd's Tortoise & Hare Algorithm/ 234 )
+14. Group the given LL into odd and even nodes
+15. Remove Nth Node from the end of the LinkedList (Forward and slow pointer)
+16. Delete the Middle Node of a Linked List (Floyd's Tortoise & Hare Algorithm)
+17. Sort a LinkedList of 0's, 1's and 2's (Dummy Pointers)
+18. Find the intersection point of Y LinkedList
+19. Add 1 to a number represented by LinkedList (By Recursion)
+20. Add 2 numbers in LinkedList(2)
+21. Reverse Nodes in K Group Size of LinkedList
+22. Rotate a LinkedList
+23. Flattening a LinkedList
+24. Clone a LinkedList with Next and Random Pointers
    
    
 

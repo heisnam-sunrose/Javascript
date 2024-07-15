@@ -35,51 +35,63 @@ const add1toLL = (head) => {
 
   let currentNode = newHead;
   let carry = 1;
-  /*
-    for adding any number to LL
-
-    let sum = null;
-    while (currentNode) {
-    if (carry === 0) {
-    return reverseLL(newHead);
-    }
-    sum = carry;
-    currentNode.data = parseInt(sum % 10);
-    carry = parseInt(sum / 10);
-    currentNode = currentNode.next;
-   }
-  */
 
   while (currentNode) {
     currentNode.data = currentNode.data + carry;
 
-    if (currentNode.dat < 10) {
+    if (currentNode.data < 10) {
       carry = 0;
       break;
     } else {
       currentNode.data = 0;
       carry = 1;
     }
+
+    currentNode = currentNode.next;
   }
 
-  if (carry) {
-    currentNode.next = new Node(carry);
-  }
+  if (carry) currentNode.next = new Node(carry);
 
   return reverseLL(newHead);
 };
 
-/*
-   Using Recursion 
-   Only Recursion has backtracking
+// Add any number to LL
+const addToLL = (head, N) => {
+  let newHead = reverseLL(head);
+
+  let currentNode = newHead;
+  let carry = N;
+
+  while (currentNode) {
+    sum = currentNode.data + carry;
+    currentNode.data = parseInt(sum % 10);
+    carry = parseInt(sum / 10);
+
+    if (carry === 0) break;
+    currentNode = currentNode.next;
+  }
+
+  if (carry > 0) currentNode.next = new Node(carry);
+
+  return reverseLL(newHead);
+};
+
+/* 
+  Optimal Solution
+  ==============================
+  Using Recursion 
+  Only Recursion has backtracking
+  TC => O(N)
+  Sc => O(N)
+
 */
 
-const helper = (node) => {
+const getCarry = (node) => {
   if (node === null) {
     return 1;
   }
 
-  let carry = helper(node.next);
+  let carry = getCarry(node.next);
   node.data += carry;
 
   if (node.data < 10) {
@@ -88,10 +100,19 @@ const helper = (node) => {
     node.data = 0;
     return 1;
   }
+
+  /*
+    TO Add any No to LL
+    let carry = this.getCarry(node.next);
+    let sum = node.data + carry;
+    node.data = sum % 10; 
+    carry = parseInt(sum /10 );
+    return carry;
+  */
 };
 
 const add1toLLByRecursion = (head) => {
-  let carry = helper(head);
+  let carry = getCarry(head);
   if (carry === 1) return new Node(carry, head);
   return head;
 };

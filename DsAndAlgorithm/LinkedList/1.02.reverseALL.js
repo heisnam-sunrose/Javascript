@@ -1,34 +1,4 @@
-console.clear();
-class Node {
-  constructor(data, next = null) {
-    this.data = data;
-    this.next = next;
-  }
-}
-
-const convertArrayToLL = (array) => {
-  // create head
-  let head = new Node(array[0]);
-  let currentNode = head;
-  let newNode;
-
-  for (let i = 1; i < array.length; i++) {
-    newNode = new Node(array[i]);
-    currentNode.NEXT = newNode;
-    currentNode = newNode;
-  }
-  return head;
-};
-
-const printLL = (head) => {
-  let currentNode = head;
-  while (currentNode) {
-    console.log(currentNode.data);
-    currentNode = currentNode.next;
-  }
-};
-
-/* 1. Reverse a DDL by reversing the data using stack 
+/* 1. Reverse a LL by reversing the data using stack 
   ------------------------------------------------
   TC -> O(2N)
   SC -> O(N)
@@ -39,7 +9,7 @@ const reverseLLStack = () => {
   // pop stacks data out and store them to the same LL
 };
 
-/* 2. Reverse a DDL by reversing Link
+/* 2. Reverse a LL by reversing Link
   --------------------------------
   TC -> O(N)
   SC -> O(1)
