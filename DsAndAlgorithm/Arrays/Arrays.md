@@ -8,3 +8,5 @@
 7. Find element that appears once in an array(136)
 8. Longest sub array with sum K with +ves,zeros and -ves ( pre sum Hashing)
 9. Longest sub array with sum K with +ves and zeros ( 2 pointers)
+10. 2 Sum Problem(1)
+11. Sort an array of 0's 1's & 2 ( Dutch National Flag Algorithm / 75 )
