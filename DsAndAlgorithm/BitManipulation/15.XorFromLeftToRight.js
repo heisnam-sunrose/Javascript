@@ -18,5 +18,5 @@ const findXor = (N) => {
 };
 
 const findXorInRange = (left, right) => {
-  return findXor(left) ^ findXor(right);
+  return findXor(left - 1) ^ findXor(right);
 };
