@@ -1,4 +1,8 @@
-// Longest Subarray with sum K
+/*
+  Longest Subarray with sum K
+  subarray => contiguous part of the array
+  subsequence / sequence => random selection of elements form the array 
+*/
 
 /*
   Naive Solution
@@ -23,9 +27,9 @@ const subArraySizeN = (arr, K) => {
 
 /*
   Optimal Solution for Longest Subarray with sum K with +ves,zeros and -ves
-  Hashing 
+  Hashing / prefix sum
   TC => O(N log N) (ordered Hash)
-  TC => O(N * 1 / N * N)( unordered Hash (1) / unordered Hash (N) 
+  TC => O(N * 1 / N * N)( unordered Hash (1) / unordered Hash (N) worst case 
   SC => O(N)
 */
 
@@ -43,9 +47,11 @@ const subArraySizeH = (arr, K) => {
       maxLength = Math.max(maxLength, i - preSumWithIndex.get(rem));
     }
 
-    if (!preSumWithIndex.has(sum)) {
-      preSumWithIndex.set(sum, i);
-    }
+    /*
+      Do not re update an index if current element is 0 / negative
+    */
+
+    if (!preSumWithIndex.has(sum)) preSumWithIndex.set(sum, i);
   }
 
   return maxLength;
@@ -54,7 +60,7 @@ const subArraySizeH = (arr, K) => {
 /*
   Optimal Solution for Longest Subarray with sum K with +ves and zeros
   2 pointers
-  TC => O(N)
+  TC => O(2N)
   SC => O(1) 
 */
 
@@ -87,4 +93,47 @@ op = 5;
 console.log(subArraySizeH(arr, -15));
 
 console.log(subArraySize2P([-1, 0, 0, 0, 0, 2, 3], 3));
+*/
+
+/* 
+   Alternate optimal solution for array with positives
+
+*/
+const subArraySizePos = (arr, K) => {
+  let n = arr.length;
+  let longest = 0;
+
+  let right = 0;
+  let left = 0;
+  let sum = 0;
+
+  while (right < n) {
+    sum += arr[right];
+
+    if (sum === K) longest = Math.max(longest, right - left + 1);
+
+    console.log(sum, left, right, 1);
+
+    while (sum > K && left <= right) {
+      sum -= arr[left];
+      left++;
+    }
+
+    console.log(sum, left, right);
+
+    right++;
+  }
+  return longest;
+};
+
+console.log(subArraySizePos([10, 5, 2, 7, 1, 9], 15));
+
+
+/*
+  Possible types of Subarray with sum K problems
+  ===============================================
+  1. Longest Subarray with sum K
+  2. Shortest Subarray with sum K
+  3. No of sub arrays count
+  4. Return all the sub arrays
 */

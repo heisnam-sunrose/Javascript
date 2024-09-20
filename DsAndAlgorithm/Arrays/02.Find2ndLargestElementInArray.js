@@ -60,6 +60,7 @@ const secondLargest = (arr) => {
 
 const secondLargestOptimal = (arr) => {
   let largest = arr[0];
+  // let largest2nd = Number.INT_MIN;
   let largest2nd = -1;
 
   for (let i = 1; i < arr.length - 1; i++) {

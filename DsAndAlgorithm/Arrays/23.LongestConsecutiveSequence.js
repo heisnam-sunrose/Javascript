@@ -34,18 +34,23 @@ const longestConsecutiveSequenceN = (nums) => {
 
 /* 
   Better Solution 
+ ====================
+  1. Sort the array
+  2. Iterate through the array and check if a sequence is formed 
+
   TC => O(N * logN) + O(N)
 */
 
 const longestConsecutiveSequenceB = (nums) => {
+  let n = nums.length;
   let longest = 1;
   let count = 0;
   let lastSmallest = Number.MIN_VALUE;
 
   // 1. sort the array
-  nums.sort((a, b) => b - a);
+  nums.sort((a, b) => a - b);
 
-  for (let i = 0; i < nums.length; i++) {
+  for (let i = 0; i < n; i++) {
     // if element repeats do nothing
     if (nums[i] == lastSmallest) continue;
     // if sequence is formed, increase count
@@ -56,10 +61,13 @@ const longestConsecutiveSequenceB = (nums) => {
     lastSmallest = nums[i];
     longest = Math.max(longest, count);
   }
+
+  return longest;
 };
 
 /* 
   Optimal Solution 
+  ( It is only optimal under the assumption that set operations takes O(1) time complexity)
   ==================
   1. Put all elements to a set
 
