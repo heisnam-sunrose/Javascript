@@ -3,81 +3,76 @@
 */
 
 class QueueImplementation {
-  constructor(size) {
-    this.items = [];
-    this.start = -1;
-    this.end = -1;
-    this.curSize = 0;
-    this.size = size;
+  constructor(size = 10) {
+    this._items = new Array(size);
+    this._start = null;
+    this._end = null;
+    this._curSize = 0;
+    this._size = size;
   }
 
-  /*
-    Enqueue (add) an element to the queue
-    push
-  */
   enqueue(element) {
-    if (this.curSize == this.size) throw new Error("Queue is full");
+    if (this.isFull()) throw new Error("Queue is full");
 
     if (this.isEmpty()) {
-      this.start = 0;
-      this.end = 0;
-    } else this.end = (this.end + 1) % this.size;
+      this._start = 0;
+      this._end = 0;
+    } else this._end = ++this._end % this._size;
 
-    this.items[this.end] = element;
-    this.curSize += 1;
+    this._items[this._end] = element;
+    this._curSize += 1;
     // this.items.push(element);
   }
 
-  // Dequeue (remove) an element from the queue
   dequeue() {
-    if (this.isEmpty()) return console.log("Queue is empty");
+    if (this.isEmpty()) throw new Error("Queue is empty");
 
-    let el = this.items[this.start];
+    const el = this._items[this._start];
+    this._items[this._start] = undefined;
 
     if (this.length() === 1) {
-      this.start = -1;
-      this.end = -1;
-    } else this.start = (this.start + 1) % this.size;
+      this._start = null;
+      this._end = null;
+    } else this._start = ++this._start % this._size;
 
-    this.curSize -= 1;
+    this._curSize -= 1;
     return el;
     // return this.items.shift();
   }
 
   peek() {
-    return this.isEmpty()
-      ? "Queue is empty"
-      : console.log(this.items[this.start]);
+    if (this.isEmpty()) throw new Error("Queue is empty");
+
+    return this._items[this._start];
   }
 
   isEmpty() {
-    return this.curSize == 0;
+    return this._curSize == 0;
     // return this.start == -1;
     // return this.items.length === 0;
   }
 
-  length() {
-    return this.curSize;
+  isFull() {
+    return this._curSize == this._size;
+  }
+
+  get length() {
+    return this._curSize;
     // return this.end + 1;
     // return this.items.length;
   }
 
-  print() {
-    console.log(this.items.toString());
+  toArray() {
+    if (this.isEmpty()) return [];
+    const result = [];
+    for (let i = 0; i < this._curSize; i++) {
+      const index = (this._start + i) % this._size;
+      result.push(this._items[index]);
+    }
+    return result;
+  }
+
+  toString() {
+    return this.toArray().join(", ");
   }
 }
-
-const queue = new QueueImplementation(3);
-queue.enqueue(2);
-queue.peek();
-queue.enqueue(3);
-queue.enqueue(5);
-// queue.enqueue(5);
-queue.peek();
-queue.print();
-queue.dequeue();
-queue.peek();
-queue.dequeue();
-queue.peek();
-queue.dequeue();
-queue.dequeue();

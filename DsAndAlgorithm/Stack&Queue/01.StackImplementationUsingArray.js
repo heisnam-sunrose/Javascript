@@ -16,61 +16,62 @@
 */
 
 class StackImplementation {
-  /*
-     Javascript Array are dynamic in nature,
-     fixing the length of the array does not makes sense
-     It is to mimic, how array implemented stack would behave in other language  
-  */
+  /**
+   * JavaScript arrays are dynamic, but this class mimics a fixed-size stack
+   * like you'd find in lower-level languages (e.g., C or Java).
+   */
   constructor(size = 10) {
-    this.items = [];
-    this.top = -1;
-    this.size = size;
+    if (size <= 0 || !Number.isInteger(size)) {
+      throw new Error("Size must be a positive integer");
+    }
+
+    this._items = new Array(size);
+    this._top = -1;
+    this._size = size;
   }
 
   push(element) {
-    if (this.top + 1 > this.size - 1) throw new Error("Stack is full");
+    if (this.isFull()) throw new Error("Stack is full");
 
-    this.top += 1;
-    this.items[this.top] = element;
-    // this.items.push(element);
+    this._items[++this._top] = element;
+    return element;
+    // this._items.push(element);
   }
 
   pop() {
     if (this.isEmpty()) return "Stack is empty";
 
-    this.top -= 1;
-    // return this.items.pop();
+    const popped = this._items[this._top];
+    this._items[this._top--] = undefined; // Clear for GC (optional)
+    return popped;
+    // return this._items.pop();
   }
 
-  top() {
+  peek() {
     if (this.isEmpty()) return "Stack is empty";
 
-    return this.items[top];
-  }
-
-  length() {
-    return this.top + 1;
-    // return this.items.length;
+    return this._items[this._top];
   }
 
   isEmpty() {
-    return this.top == -1;
-    // return this.items.length == 0;
+    return this._top === -1;
+    // return this._items.length == 0;
   }
 
-  print() {
-    console.log(this.items.toString());
+  isFull() {
+    return this.length === this._size;
+  }
+
+  get length() {
+    return this._top + 1;
+    // return this._items.length;
+  }
+
+  toArray() {
+    return this._items.slice(0, this.length);
+  }
+
+  toString() {
+    return this.toArray().join(", ");
   }
 }
-
-
-const stack = new StackImplementation(5);
-stack.push(1);
-stack.push(2);
-stack.push(3);
-stack.push(4);
-stack.push(5);
-// stack.push(6);
-console.log(stack.length());
-console.log(stack.isEmpty());
-stack.print();
