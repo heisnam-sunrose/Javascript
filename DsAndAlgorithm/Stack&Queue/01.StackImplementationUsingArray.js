@@ -68,6 +68,7 @@ class StackImplementation {
   }
 
   toArray() {
+    // return this._items - this might be sufficient
     return this._items.slice(0, this.length);
   }
 

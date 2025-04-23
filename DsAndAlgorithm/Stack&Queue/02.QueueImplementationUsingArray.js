@@ -30,7 +30,7 @@ class QueueImplementation {
     const el = this._items[this._start];
     this._items[this._start] = undefined;
 
-    if (this.length() === 1) {
+    if (this.length === 1) {
       this._start = null;
       this._end = null;
     } else this._start = ++this._start % this._size;

@@ -19,7 +19,9 @@ class QueueUsingStack {
   }
 }
 
-// Second Approach
+/*
+  Lazy reversal (only transfer when stack2 is empty) 
+*/
 
 class QueueUsingStackV2 {
   constructor() {
