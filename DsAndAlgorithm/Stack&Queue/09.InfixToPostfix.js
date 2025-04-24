@@ -9,18 +9,19 @@
 */
 
 class InfixToPostfix {
-  constructor(str) {
-    this.stack = new StackImplementation();
+  constructor() {
+    this.stack = new StackImplementation(1000);
     this.postFixEx = "";
   }
-  convert(str) {
+  convert(expression) {
+    const str = expression.replace(/\s+/g, "");
     for (const char of str) {
-      if (isOperand(char)) this.postFixEx += char;
-      else if (isOpeningBracket(char)) this.stack.push(char);
-      else if (isClosingBracket(char)) {
+      if (this.isOperand(char)) this.postFixEx += char;
+      else if (this.isOpeningBracket(char)) this.stack.push(char);
+      else if (this.isClosingBracket(char)) {
         while (
           !this.stack.isEmpty() &&
-          !this.isOpeningBracket(this.stack.top())
+          !this.isOpeningBracket(this.stack.peek())
         ) {
           this.postFixEx += this.stack.pop();
         }
@@ -30,14 +31,14 @@ class InfixToPostfix {
         // char is operator
         while (
           !this.stack.isEmpty() &&
-          /* 
+          /*
               this.getPriority(char) <= this.getPriority(this.stack.top())
-              This works for left-associative operators. 
-              But for right-associative ones (like ^), 
+              This works for left-associative operators.
+              But for right-associative ones (like ^),
               we must not pop if the current operator has the same precedence.
             */
-          (this.getPriority(char) < this.getPriority(this.stack.top()) ||
-            (this.getPriority(char) === this.getPriority(this.stack.top()) &&
+          (this.getPriority(char) < this.getPriority(this.stack.peek()) ||
+            (this.getPriority(char) === this.getPriority(this.stack.peek()) &&
               !this.isRightAssociative(char)))
         ) {
           this.postFixEx += this.stack.pop();
@@ -88,3 +89,6 @@ class InfixToPostfix {
     return priorities[operator] ?? -1;
   }
 }
+
+cn = new InfixToPostfix();
+console.log(cn.convert("A+B*(C^D-E)^(F+G*H)-I"));
