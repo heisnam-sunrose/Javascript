@@ -76,3 +76,57 @@ class QueueImplementation {
     return this.toArray().join(", ");
   }
 }
+
+// Circular Queue Implementation
+class QueueImp {
+  constructor(size) {
+    if (!size) throw new Error("Provide Queue size");
+    this._size = size;
+    this._items = new Array(size);
+    this._front = -1;
+    this._rear = -1;
+  }
+
+  enqueue(elm) {
+    if (this.isFull()) throw new Error("Queue is full");
+
+    if (this.isEmpty()) {
+      this._front = 0;
+      this._rear = 0;
+    } else {
+      this._rear = (this._rear + 1) % this._size;
+    }
+
+    this._items[this._rear] = elm;
+
+    return elm;
+  }
+
+  dequeue() {
+    if (this.isEmpty()) throw new Error("Queue is Empty");
+    const elm = this._items[this._front];
+
+    if (this._front == this._rear) {
+      this._front = -1;
+      this._rear = -1;
+    } else {
+      this._front = (this._front + 1) % this._size;
+    }
+
+    return elm;
+  }
+
+  peek() {
+    if (this.isEmpty()) throw new Error("Queue is Empty");
+
+    return this._items[this._front];
+  }
+
+  isFull() {
+    return (this._rear + 1) % this._size === this._head;
+  }
+
+  isEmpty() {
+    return this._front === -1;
+  }
+}
